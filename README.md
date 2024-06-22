@@ -4,8 +4,9 @@
 Имеются настройки для использования модулей по отдельности и логирования изменений в отдельный .log файл. Файл сохраняется в папку с Synthesis.
 
 Планы:
-Добавить автоперевод для диалогов
-Добавить автоперевод для отдельных модулей из одного конкретного файла
+- Добавить автоперевод для диалогов
+- Добавить автоперевод для отдельных модулей из одного конкретного файла
+
 
 
 [BETA-VERSION]This tool is created and developed for the automatic translation of strings in mods. It is not a translator like Deepl or Google Translate. It is a patcher that replaces existing translations of the same texts in another language (currently only Russian).
