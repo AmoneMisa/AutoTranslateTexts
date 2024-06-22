@@ -12,17 +12,19 @@ namespace AutoTranslateTexts
 {
     public static class BookPatcher
     {
-        public static void Run(IPatcherState<ISkyrimMod, ISkyrimModGetter> state)
+        public static void Run(IPatcherState<ISkyrimMod, ISkyrimModGetter> state, bool log)
         {
             var bookTranslations = new Dictionary<FormKey, BookTranslation>();
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             foreach (var book in state.LoadOrder.PriorityOrder.Book().WinningOverrides())
             {
                 ProcessBook(book, bookTranslations);
             }
-            
-            PrintTranslations(bookTranslations);
+
+            if (log)
+            {
+                PrintTranslations(bookTranslations);
+            }
         }
 
         private static void ProcessBook(IBookGetter book, Dictionary<FormKey, BookTranslation> bookTranslations)
@@ -51,7 +53,7 @@ namespace AutoTranslateTexts
             {
                 return translation;
             }
-            
+
             translation.Title = EncodingHelper.ConvertToUtf8(translation.Title);
             translation.Description = EncodingHelper.ConvertToUtf8(translation.Description);
             translation.Content = EncodingHelper.ConvertToUtf8(translation.Content);
@@ -83,7 +85,7 @@ namespace AutoTranslateTexts
                 return "Unknown";
 
             var content = translatedString.String;
-            
+
             return IsRussian(content) ? "Russian" : "Other";
         }
 
@@ -91,7 +93,7 @@ namespace AutoTranslateTexts
         {
             return content.Any(ch => ch is >= 'А' and <= 'я' or 'ё' or 'Ё');
         }
-        
+
         private static void PrintTranslations(Dictionary<FormKey, BookTranslation> bookTranslations)
         {
             foreach (var entry in bookTranslations)

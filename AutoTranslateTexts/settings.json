@@ -1,0 +1,9 @@
+﻿{
+  "Modules": {
+    "Books": 1,
+    "Locations": 1,
+    "Names": 1,
+    "Dialogues": 1,
+    "Items": 1
+  }
+}
