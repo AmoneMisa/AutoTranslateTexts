@@ -17,11 +17,11 @@ namespace AutoTranslateTexts
             foreach (var location in state.LoadOrder.PriorityOrder.Location().WinningOverrides())
             {
                 ProcessLocation(location, locationTranslations);
-
-                if (log)
-                {
-                    PrintTranslations(locationTranslations);
-                }
+            }
+            
+            if (log)
+            {
+                PrintTranslations(locationTranslations);
             }
         }
 
@@ -37,12 +37,20 @@ namespace AutoTranslateTexts
 
         private static void PrintTranslations(Dictionary<FormKey, LocationTranslation> locationTranslations)
         {
-            foreach (var entry in locationTranslations)
+            var patcherName = "LocationPatcher";
+            var logFilePath = Path.Combine(Environment.CurrentDirectory, $"WhitesLove-Patcher-AutoTranslateTexts-{patcherName}.log");
+            
+            using (var logWriter = new StreamWriter(logFilePath, false, Encoding.UTF8))
             {
-                Console.WriteLine($"FormKey: {entry.Key}");
-                Console.WriteLine($"Name: {entry.Value.Name}");
-                Console.WriteLine(new string('-', 40));
+                foreach (var entry in locationTranslations)
+                {
+                    logWriter.WriteLine($"FormKey: {entry.Key}");
+                    logWriter.WriteLine($"Name: {entry.Value.Name}");
+                    logWriter.WriteLine(new string('-', 40));
+                }
             }
+
+            Console.WriteLine($"Log file created at: {logFilePath}");
         }
     }
 

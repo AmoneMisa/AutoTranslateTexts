@@ -33,22 +33,22 @@ namespace AutoTranslateTexts
 
             if (settings.Books)
             {
-                BookPatcher.Run(state, settings.Log);
+                BookPatcher.Run(state, settings.BookLog);
             }
 
             if (settings.Locations)
             {
-                LocationPatcher.Run(state, settings.Log);
+                LocationPatcher.Run(state, settings.LocationsLog);
             }
 
             if (settings.Names)
             {
-                NamePatcher.Run(state, settings.Log);
+                NamePatcher.Run(state, settings.NamesLog);
             }
 
             if (settings.Items)
             {
-                ItemPatcher.Run(state, settings.Log);
+                ItemPatcher.Run(state, settings.ItemsLog);
             }
         }
     }

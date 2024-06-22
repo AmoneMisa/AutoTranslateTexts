@@ -31,11 +31,11 @@ namespace AutoTranslateTexts
                 {
                     ProcessAndPrintItem(item, itemTranslations);
                 }
-                
-                if (log)
-                {
-                    PrintTranslations(itemTranslations);
-                }
+            }
+            
+            if (log)
+            {
+                PrintTranslations(itemTranslations);
             }
         }
 
@@ -68,13 +68,21 @@ namespace AutoTranslateTexts
 
         private static void PrintTranslations(Dictionary<FormKey, ItemTranslation> itemTranslations)
         {
-            foreach (var entry in itemTranslations)
+            var patcherName = "ItemPatcher";
+            var logFilePath = Path.Combine(Environment.CurrentDirectory, $"WhitesLove-Patcher-AutoTranslateTexts-{patcherName}.log");
+            
+            using (var logWriter = new StreamWriter(logFilePath, false, Encoding.UTF8))
             {
-                Console.WriteLine($"FormKey: {entry.Key}");
-                Console.WriteLine($"Name: {entry.Value.Name}");
-                Console.WriteLine($"Description: {entry.Value.Description}");
-                Console.WriteLine(new string('-', 40));
+                foreach (var entry in itemTranslations)
+                {
+                    logWriter.WriteLine($"FormKey: {entry.Key}");
+                    logWriter.WriteLine($"Name: {entry.Value.Name}");
+                    logWriter.WriteLine($"Description: {entry.Value.Description}");
+                    logWriter.WriteLine(new string('-', 40));
+                }
             }
+
+            Console.WriteLine($"Log file created at: {logFilePath}");
         }
     }
 

@@ -6,8 +6,14 @@ namespace AutoTranslateTexts
 {
     public class Settings
     {
-        [SynthesisTooltip("Show Log | 1 - On | 0 - Off")]
-        public bool Log = false;
+        [SynthesisTooltip("Show Book Log | 1 - On | 0 - Off")]
+        public bool BookLog = false;
+        [SynthesisTooltip("Show Locations Log | 1 - On | 0 - Off")]
+        public bool LocationsLog = false;
+        [SynthesisTooltip("Show Items Log | 1 - On | 0 - Off")]
+        public bool ItemsLog = false;
+        [SynthesisTooltip("Show Names Log | 1 - On | 0 - Off")]
+        public bool NamesLog = false;
         [SynthesisTooltip("Books | 1 - On | 0 - Off")]
         public bool Books = true;
         [SynthesisTooltip("Locations | 1 - On | 0 - Off")]

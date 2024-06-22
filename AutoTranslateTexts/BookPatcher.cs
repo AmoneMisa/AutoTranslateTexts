@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Skyrim;
 using Mutagen.Bethesda.Plugins.Cache;
@@ -93,18 +94,26 @@ namespace AutoTranslateTexts
         {
             return content.Any(ch => ch is >= 'А' and <= 'я' or 'ё' or 'Ё');
         }
-
+        
         private static void PrintTranslations(Dictionary<FormKey, BookTranslation> bookTranslations)
         {
-            foreach (var entry in bookTranslations)
+            var patcherName = "ItemPatcher";
+            var logFilePath = Path.Combine(Environment.CurrentDirectory, $"WhitesLove-Patcher-AutoTranslateTexts-{patcherName}.log");
+            
+            using (var logWriter = new StreamWriter(logFilePath, false, Encoding.UTF8))
             {
-                Console.WriteLine($"FormKey: {entry.Key}");
-                Console.WriteLine($"Title: {entry.Value.Title}");
-                Console.WriteLine($"Description: {entry.Value.Description}");
-                Console.WriteLine($"Content: {entry.Value.Content}");
-                Console.WriteLine($"Language: {entry.Value.Language}");
-                Console.WriteLine(new string('-', 40));
+                foreach (var entry in bookTranslations)
+                {
+                    logWriter.WriteLine($"FormKey: {entry.Key}");
+                    logWriter.WriteLine($"Title: {entry.Value.Title}");
+                    logWriter.WriteLine($"Description: {entry.Value.Description}");
+                    logWriter.WriteLine($"Content: {entry.Value.Content}");
+                    logWriter.WriteLine($"Language: {entry.Value.Language}");
+                    logWriter.WriteLine(new string('-', 40));
+                }
             }
+
+            Console.WriteLine($"Log file created at: {logFilePath}");
         }
     }
 
