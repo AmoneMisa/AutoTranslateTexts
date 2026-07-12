@@ -1,12 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Mutagen.Bethesda;
 using Mutagen.Bethesda.Synthesis;
 using Mutagen.Bethesda.Skyrim;
-using Noggog;
-using System.Collections.Generic;
-using Mutagen.Bethesda.Plugins;
 
 namespace AutoTranslateTexts
 {
@@ -14,6 +12,15 @@ namespace AutoTranslateTexts
     {
         public static Lazy<Settings> _settings = null!;
         public static Settings settings => _settings.Value;
+
+        private static readonly IReadOnlyList<IPatcherModule> Modules = new IPatcherModule[]
+        {
+            new BookModule(),
+            new LocationModule(),
+            new NameModule(),
+            new ItemModule(),
+            new DialogueModule()
+        };
 
         public static async Task<int> Main(string[] args)
         {
@@ -31,24 +38,15 @@ namespace AutoTranslateTexts
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            if (settings.Books)
+            foreach (var module in Modules)
             {
-                BookPatcher.Run(state, settings.BookLog);
-            }
+                var moduleSettings = module.GetSettings(settings);
+                if (!moduleSettings.Enabled)
+                {
+                    continue;
+                }
 
-            if (settings.Locations)
-            {
-                LocationPatcher.Run(state, settings.LocationsLog);
-            }
-
-            if (settings.Names)
-            {
-                NamePatcher.Run(state, settings.NamesLog);
-            }
-
-            if (settings.Items)
-            {
-                ItemPatcher.Run(state, settings.ItemsLog);
+                module.Run(state, settings.TargetLanguage, moduleSettings.Log);
             }
         }
     }

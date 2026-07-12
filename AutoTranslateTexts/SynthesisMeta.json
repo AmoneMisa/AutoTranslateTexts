@@ -2,7 +2,7 @@
   "Nickname": "WhitesLove - AutoTranslateTexts",
   "Visibility": "Visible",
   "OneLineDescription": "This tool is created and developed for the automatic translation of strings in mods.",
-  "LongDescription": "This tool is created and developed for the automatic translation of strings in mods. It is not a translator like Deepl or Google Translate. It is a patcher that replaces existing translations of the same texts in another language (currently only Russian)",
+  "LongDescription": "This tool is created and developed for the automatic translation of strings in mods. It is not a translator like Deepl or Google Translate. It is a patcher that replaces existing translations of the same texts in another language. Supports NPC names, books and notes, locations, items and dialogue, each module toggled separately. The target language is chosen in the settings and detected by script (Cyrillic, Chinese, Japanese, Korean, Arabic, Greek).",
   "PreferredAutoVersioning": "Default",
   "RequiredMods": [],
   "TargetedReleases": [
